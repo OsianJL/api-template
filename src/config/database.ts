@@ -5,7 +5,9 @@ const prisma = new PrismaClient();
 
 async function connectMongoDB() {
   try {
-    await mongoose.connect('mongodb://mongo_user:mongo_password@localhost:27017');
+    await mongoose.connect(
+      'mongodb://mongo_user:mongo_password@localhost:27017'
+    );
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('MongoDB connection error:', error);
