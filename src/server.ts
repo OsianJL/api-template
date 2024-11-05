@@ -25,4 +25,4 @@ io.on('connection', (socket) => {
   });
 });
 
-export { httpServer, io };
+export { httpServer, app };
