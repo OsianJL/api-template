@@ -1,16 +1,25 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { registerUser, loginUser } from '../services/authService';
 
-export const register = async (req: Request, res: Response) => {
+export const register: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-    const { name, email, password } = req.body;
-    const user = await registerUser(name, email, password);
+    const { name, surname, email, password } = req.body;
+    const user = await registerUser(name, surname, email, password);
     res.status(201).json(user);
   } catch (error) {
-    console.error(error); // Añadir registro de error
-    res.status(400).json({
-      message: error instanceof Error ? error.message : 'Error inesperado',
-    });
+    if (
+      error instanceof Error &&
+      error.message === 'The email is already in use.'
+    ) {
+      res.status(400).json({ message: error.message });
+    } else {
+      console.error(error);
+      next(error);
+    }
   }
 };
 
