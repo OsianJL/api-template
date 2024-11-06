@@ -1,8 +1,4 @@
-1. Crear el Archivo README.md
-En la raíz de tu proyecto, crea un archivo README.md con la siguiente estructura:
 
-markdown
-Copiar código
 # API Template
 
 ## Descripción
@@ -70,3 +66,31 @@ Este proyecto está licenciado bajo la MIT License.
 
 Copiar código
 Este archivo README proporciona instrucciones detalladas sobre la instalación, configuración y ejecución del proyecto, así como una descripción general de su estructura y funcionalidades.
+
+### Prisma y Migraciones
+
+Este proyecto utiliza **Prisma** como ORM (Object-Relational Mapping) para interactuar con la base de datos de manera eficiente y estructurada. Prisma permite definir modelos de datos en archivos `.prisma`, los cuales representan tablas en la base de datos. Para mantener una arquitectura modular, cada modelo se define en un archivo separado dentro de la carpeta `prisma/schema`, y Prisma combina estos archivos para generar un esquema unificado.
+
+#### Cómo realizar migraciones
+
+Para realizar migraciones, que son cambios en la estructura de la base de datos (como añadir o modificar tablas), sigue estos pasos:
+
+1. **Definir o modificar un modelo** en un archivo `.prisma` dentro de la carpeta `prisma/schema`.
+2. **Ejecutar la migración** con el siguiente comando, proporcionando un nombre descriptivo para la migración:
+
+   ```bash
+   npx prisma migrate dev --name nombre_migracion
+
+Esto creará un archivo de migración con las instrucciones SQL necesarias y aplicará los cambios a la base de datos.
+
+Generar el cliente de Prisma usando:
+
+bash
+Copiar código
+npx prisma generate
+Esto asegura que Prisma esté sincronizado con los cambios recientes, actualizando los tipos y permitiendo el uso de los modelos en el código.
+
+Este flujo de trabajo asegura que la base de datos esté siempre sincronizada con los modelos definidos en Prisma, facilitando una estructura de datos coherente y escalable.
+
+go
+Copiar código

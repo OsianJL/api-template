@@ -1,0 +1,7 @@
+// prisma/schema/userProfile.prisma
+
+model UserProfile {
+  id   Int    @id @default(autoincrement())
+  name String
+  bio  String?
+}
